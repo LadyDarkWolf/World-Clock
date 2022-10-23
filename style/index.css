@@ -1,18 +1,59 @@
 body {
     background: pink;
+    font-family: sans-serif;
 }
 h1 {
     text-align: center;
+    font-family: sans-serif;
+    font-size: 36px;
 }
 
+select {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    font-size:18px;
+    color: blue;
+}
 footer {
     text-align:center;
-    font-size: 12px;
+    font-size: 20px;
+    color: rgba(0,0,0,0.6);
 }
 .container {
     max-width: 600px;
     background: white;
-    margin: 20px auto;
+    margin: 60px auto;
     border-radius: 10px;
-    padding: 20px;
+    padding: 30px;
+    box-shadow: 10px 10px 5px rgba(0,0,0,0.3);
+}
+.city {
+    display: flex;
+    justify-content:space-between;
+    margin: 20px 0px;
+    padding: 0 0 20px;
+    border-bottom: 1px dashed rgba(0,0,0,0.2);
+}
+
+.city:last-child {
+    border: none;
+}
+h2 {
+    font-size: 28px;
+    margin: 0 0 5px;
+}
+
+.date {
+    opacity: 0.7;
+}
+.time {
+    font-size: 48px;
+    font-weight: bold;
+}
+.time small {
+    font-size:16px;
+    line-height:48px;
+    vertical-align: middle;
 }
