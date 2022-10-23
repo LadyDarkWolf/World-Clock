@@ -9,3 +9,10 @@ footer {
     text-align:center;
     font-size: 12px;
 }
+.container {
+    max-width: 600px;
+    background: white;
+    margin: 20px auto;
+    border-radius: 10px;
+    padding: 20px;
+}
