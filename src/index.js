@@ -39,12 +39,12 @@ function updateTime() {
 function updateCity(event) {
     let cityTimeZone = event.target.value;
     if (cityTimeZone.length > 0) {
-        let cityName = "Local Time";
-        let cityTime = moment();
-        if (cityTimeZone !== "local") {
-            cityName = cityTimeZone.replace('_', ' ').split("/")[1];
-            cityTime = moment.tz(cityTimeZone);
+        if (cityTimeZone === "local") {
+            cityTimeZone = moment.tz.guess();
+            console.log(cityTimeZone);
         }
+        let cityName = cityTimeZone.replace('_', ' ').split("/")[1];
+        let cityTime = moment.tz(cityTimeZone);
         let citiesElement = document.querySelector("#cities");
         citiesElement.innerHTML = `
   <div id="cities">
