@@ -12,31 +12,37 @@ function countryFlag(code) {
     return returnValue;
 }
 
+function updateIndividualCity (cityElement, timeZone) {
+    if (cityElement) {
+        if (!timeZone) {
+            let cityTimeZoneElement = cityElement.querySelector("#selected-city-timezone");
+            timeZone = cityTimeZoneElement.value;
+        }
+        let cityDateElement = cityElement.querySelector(".date");
+        let cityTimeElement = cityElement.querySelector(".time");
+ //       let cityFlagElement = cityElement.querySelector("#flag");
+ //       cityFlagElement.innerHTML = countryFlag("UN");
+        let cityTime = moment.tz(timeZone);
+        cityDateElement.innerHTML = cityTime.format("MMMM Do, YYYY");
+        cityTimeElement.innerHTML = cityTime.format("h:mm:ss [<small>]A[</small>]");
+    }
+}
+
 function updateTime() {
 
     let losAngelesElement = document.querySelector("#los-angeles");
-    if (losAngelesElement) {
-        let losAngelesDateElement = losAngelesElement.querySelector(".date");
-        let losAngelesTimeElement = losAngelesElement.querySelector(".time");
-        let losAngelesFlagElement = losAngelesElement.querySelector("#flag");
-        losAngelesFlagElement.innerHTML = countryFlag("US");
-        let losAngelesTime = moment.tz("America/Los_Angeles");
-        losAngelesDateElement.innerHTML = losAngelesTime.format("MMMM Do, YYYY");
-        losAngelesTimeElement.innerHTML = losAngelesTime.format("h:mm:ss [<small>]A[</small>]");
-    }
-    let canberraElement = document.querySelector("#canberra");
-    if (canberraElement) {
+    updateIndividualCity (losAngelesElement, "America/Los_Angeles");
 
-        let canberraDateElement = canberraElement.querySelector(".date");
-        let canberraTimeElement = canberraElement.querySelector(".time");
-        let canberraFlagElement = canberraElement.querySelector("#flag");
-        canberraFlagElement.innerHTML = countryFlag("AU");
-        let canberraTime = moment.tz("Australia/Canberra");
-        canberraDateElement.innerHTML = canberraTime.format("MMMM Do, YYYY");
-        canberraTimeElement.innerHTML = canberraTime.format("h:mm:ss [<small>]A[</small>]");
-    }
+    let canberraElement = document.querySelector("#canberra");
+    updateIndividualCity (canberraElement, "Australia/Canberra");
+
+    let tokyoElement = document.querySelector("#tokyo");
+    updateIndividualCity (tokyoElement, "Asia/Tokyo");
+
+    let selectedCityElement = document.querySelector("#selected-city");
+    updateIndividualCity( selectedCityElement, "");
 }
-function updateCity(event) {
+function updateSelectedCity(event) {
     let cityTimeZone = event.target.value;
     if (cityTimeZone.length > 0) {
         if (cityTimeZone === "local") {
@@ -47,7 +53,10 @@ function updateCity(event) {
         let citiesElement = document.querySelector("#cities");
         citiesElement.innerHTML = `
     <div id="cities">
-        <div class="city">
+          
+        <div class="city" id="selected-city">
+        <input type="hidden" id="selected-city-name" value="${cityName}">
+        <input type="hidden" id="selected-city-timezone" value="${cityTimeZone}"> 
             <div>
                 <h2>${cityName} <span id="flag"></span></h2>
                 <div class="date">${cityTime.format("MMMM Do, YYYY")}</div>
@@ -67,4 +76,5 @@ updateTime();
 setInterval(updateTime, 1000);
 
 let citySelectElement = document.querySelector("#city-select");
-citySelectElement.addEventListener("change", updateCity);
+citySelectElement.addEventListener("change", updateSelectedCity);
+
