@@ -41,7 +41,6 @@ function updateCity(event) {
     if (cityTimeZone.length > 0) {
         if (cityTimeZone === "local") {
             cityTimeZone = moment.tz.guess();
-            console.log(cityTimeZone);
         }
         let cityName = cityTimeZone.replace('_', ' ').split("/")[1];
         let cityTime = moment.tz(cityTimeZone);
